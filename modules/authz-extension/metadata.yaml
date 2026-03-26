@@ -1,3 +1,17 @@
+# Copyright 2026 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 apiVersion: blueprints.cloud.google.com/v1alpha1
 kind: BlueprintMetadata
 metadata:
@@ -6,18 +20,15 @@ metadata:
     config.kubernetes.io/local-config: "true"
 spec:
   info:
-    title: terraform-google-policy-authz-extension
+    title: Google Cloud Network Services AuthzExtension
     source:
-      repo: https://github.com/viojha96/terraform-google-network-security-authz.git
+      repo: https://github.com/GoogleCloudPlatform/terraform-google-network-security-authz.git
       sourceType: git
-    version: 0.0.22
+      dir: /modules/authz-extension
     actuationTool:
       flavor: Terraform
-      version: ">= 0.13"
-    description:
-      tagline: This is an auto-generated module.
-      detailed: "This module was generated from "
-      preDeploy: To deploy this blueprint you must have an active billing account and billing permissions.
+      version: ">= 1.3"
+    description: {}
     icon: assets/icon.png
     costEstimate:
       description: Blueprint cost details
@@ -33,81 +44,76 @@ spec:
       - title: Hosting a Static Website
         url: https://cloud.google.com/storage/docs/hosting-static-website
     examples:
-      - name: simple_example
-        location: examples/simple_example
+      - name: authz_extension
+        location: examples/authz_extension
+      - name: authz_policy
+        location: examples/authz_policy
+      - name: policy_authz_extension
+        location: examples/policy_authz_extension
   interfaces:
     variables:
-      - name: project_id
+      - name: authority
+        description: Required. The authority header of the gRPC request.
         varType: string
-        required: true
+        defaultValue: authz-ext.example.com
+      - name: description
+        description: A free-text description of the resource.
+        varType: string
+      - name: labels
+        description: A set of key/value label pairs to assign to the resource.
+        varType: map(string)
+        defaultValue: {}
+      - name: load_balancing_scheme
+        description: The load balancing scheme for which the AuthzExtension is applicable. Must be one of `INTERNAL_MANAGED` or `EXTERNAL_MANAGED`.
+        varType: string
+        defaultValue: INTERNAL_MANAGED
       - name: location
+        description: The location of the AuthzExtension resource.
         varType: string
         required: true
-      - name: extensions_config
-        description: A map of unique Authz Extensions, indexed by their name.
-        varType: |-
-          map(object({
-              authority             = string
-              backend_service       = string
-              load_balancing_scheme = string
-              description           = optional(string, "Managed by ADC")
-              timeout               = optional(string, "0.1s")
-              fail_open             = optional(bool, false)
-              forward_headers       = optional(list(string), [])
-            }))
+      - name: name
+        description: The name of the AuthzExtension resource.
+        varType: string
+        defaultValue: my-authz-extension
+      - name: project_id
+        description: The ID of the project in which the resource belongs. If not provided, the provider project is used.
+        varType: string
         required: true
-      - name: policies_config
-        description: A map of Authz Policies with structured HTTP rules, indexed by name.
-        varType: |-
-          map(object({
-              action                = string
-              load_balancing_scheme = string
-              target_resources      = list(string)
-              description           = optional(string, "Managed by ADC")
-              extension_names       = optional(list(string), [])
-              iap_enabled           = optional(bool, false)
-              http_rules = optional(list(object({
-                when = optional(string)
-                from = optional(object({
-                  not_sources = optional(list(object({
-                    ip_blocks = optional(list(object({
-                      prefix = string
-                      length = number
-                    })), [])
-                    principals = optional(list(object({
-                      principal_selector = optional(string, "CLIENT_CERT_URI_SAN")
-                      principal = optional(object({
-                        exact       = optional(string)
-                        ignore_case = optional(bool, true)
-                      }))
-                    })), [])
-                  })), [])
-                }))
-                to = optional(object({
-                  operations = optional(list(object({
-                    methods = optional(list(string), [])
-                    paths   = optional(list(object({ exact = string })), [])
-                    header_set = optional(list(object({
-                      headers = optional(list(object({
-                        name = string
-                        value = optional(object({
-                          exact       = string
-                          ignore_case = optional(bool, true)
-                        }))
-                      })), [])
-                    })), [])
-                  })), [])
-                }))
-              })), [])
-            }))
+      - name: service
+        description: The service that runs the extension (e.g., a BackendService URI or iap.googleapis.com).
+        varType: string
         required: true
+      - name: timeout
+        description: "Specifies the timeout for each individual message on the stream (between 10-10000ms). Format: '0.1s'."
+        varType: string
+        defaultValue: 10s
+      - name: fail_open
+        description: Determines how the proxy behaves if the call to the extension fails. TRUE to continue, FALSE to error.
+        varType: bool
+        defaultValue: false
+      - name: metadata
+        description: Metadata included as part of the ProcessingRequest message. Supports {forwarding_rule_id} substitution.
+        varType: map(string)
+        defaultValue: {}
+      - name: forward_headers
+        description: List of HTTP headers to forward to the extension. If omitted, all headers are sent.
+        varType: list(string)
+      - name: wire_format
+        description: "The format of communication supported. Possible values: WIRE_FORMAT_UNSPECIFIED, EXT_PROC_GRPC, EXT_AUTHZ_GRPC."
+        varType: string
     outputs:
-      - name: extension_ids
-        description: Map of extension names to their unique resource IDs.
-      - name: policy_extension_map
-        description: Maps each policy name to its assigned extension IDs (if CUSTOM action).
-      - name: policy_ids
-        description: Map of policy names to their unique resource IDs.
+      - name: create_time
+        description: The timestamp when the resource was created.
+      - name: effective_labels
+        description: All labels present on the resource in GCP, including those from Terraform and other sources.
+      - name: id
+        description: The fully qualified identifier of the AuthzExtension resource.
+      - name: name
+        description: The name of the created AuthzExtension resource.
+      - name: terraform_labels
+        description: The combination of labels configured directly on the resource and default provider labels.
+      - name: update_time
+        description: The timestamp when the resource was last updated.
   requirements:
     roles:
       - level: Project

@@ -34,3 +34,23 @@ module "policy_authz_extension" {
     }
   }
 }
+
+<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+## Inputs
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| extensions\_config | A map of unique Authz Extensions, indexed by their name. | <pre>map(object({<br>    authority             = string<br>    backend_service       = string<br>    load_balancing_scheme = string<br>    description           = optional(string, "Managed by ADC")<br>    timeout               = optional(string, "0.1s")<br>    fail_open             = optional(bool, false)<br>    forward_headers       = optional(list(string), [])<br>  }))</pre> | n/a | yes |
+| location | n/a | `string` | n/a | yes |
+| policies\_config | A map of Authz Policies with structured HTTP rules, indexed by name. | <pre>map(object({<br>    action                = string<br>    load_balancing_scheme = string<br>    target_resources      = list(string)<br>    description           = optional(string, "Managed by ADC")<br>    extension_names       = optional(list(string), [])<br>    iap_enabled           = optional(bool, false)<br>    http_rules = optional(list(object({<br>      when = optional(string)<br>      from = optional(object({<br>        not_sources = optional(list(object({<br>          ip_blocks = optional(list(object({<br>            prefix = string<br>            length = number<br>          })), [])<br>          principals = optional(list(object({<br>            principal_selector = optional(string, "CLIENT_CERT_URI_SAN")<br>            principal = optional(object({<br>              exact       = optional(string)<br>              ignore_case = optional(bool, true)<br>            }))<br>          })), [])<br>        })), [])<br>      }))<br>      to = optional(object({<br>        operations = optional(list(object({<br>          methods = optional(list(string), [])<br>          paths   = optional(list(object({ exact = string })), [])<br>          header_set = optional(list(object({<br>            headers = optional(list(object({<br>              name = string<br>              value = optional(object({<br>                exact       = string<br>                ignore_case = optional(bool, true)<br>              }))<br>            })), [])<br>          })), [])<br>        })), [])<br>      }))<br>    })), [])<br>  }))</pre> | n/a | yes |
+| project\_id | n/a | `string` | n/a | yes |
+
+## Outputs
+
+| Name | Description |
+|------|-------------|
+| extension\_ids | The fully qualified resource names designating the authorization extensions provisioned by the module. |
+| policy\_extension\_map | A mapping of each authorization policy name to its designated authorization extension resource identifier. |
+| policy\_ids | The fully qualified resource names designating the authorization policies provisioned by the module. |
+
+<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

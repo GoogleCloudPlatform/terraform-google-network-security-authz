@@ -20,10 +20,11 @@ metadata:
     config.kubernetes.io/local-config: "true"
 spec:
   info:
-    title: Google Cloud Network Services AuthzExtension
+    title: Google Cloud Network Security AuthzPolicy
     source:
-      repo: https://github.com/viojha96/terraform-google-network-security-authz.git
+      repo: https://github.com/GoogleCloudPlatform/terraform-google-network-security-authz.git
       sourceType: git
+      dir: /modules/authz-policy
     version: 0.0.4
     actuationTool:
       flavor: Terraform
@@ -203,3 +204,36 @@ spec:
         version: ">= 6.0.0"
       - source: hashicorp/random
         version: ">= 3.0"
+  ui:
+    input:
+      variables:
+        action:
+          name: action
+          title: Action
+        custom_provider:
+          name: custom_provider
+          title: Custom Provider
+        description:
+          name: description
+          title: Description
+        http_rules:
+          name: http_rules
+          title: Http Rules
+        labels:
+          name: labels
+          title: Labels
+        location:
+          name: location
+          title: Location
+        name:
+          name: name
+          title: Name
+        policy_profile:
+          name: policy_profile
+          title: Policy Profile
+        project_id:
+          name: project_id
+          title: Project Id
+        target:
+          name: target
+          title: Target

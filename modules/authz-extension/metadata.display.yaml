@@ -22,8 +22,9 @@ spec:
   info:
     title: Google Cloud Network Services AuthzExtension
     source:
-      repo: https://github.com/viojha96/terraform-google-network-security-authz.git
+      repo: https://github.com/GoogleCloudPlatform/terraform-google-network-security-authz.git
       sourceType: git
+      dir: /modules/authz-extension
   ui:
     input:
       variables:
