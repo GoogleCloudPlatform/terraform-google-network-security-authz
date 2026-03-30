@@ -55,7 +55,7 @@ spec:
       - name: authority
         description: Required. The authority header of the gRPC request.
         varType: string
-        defaultValue: authz-ext.example.com
+        required: true
       - name: description
         description: A free-text description of the resource.
         varType: string
@@ -66,7 +66,7 @@ spec:
       - name: load_balancing_scheme
         description: The load balancing scheme for which the AuthzExtension is applicable. Must be one of `INTERNAL_MANAGED` or `EXTERNAL_MANAGED`.
         varType: string
-        defaultValue: INTERNAL_MANAGED
+        required: true
       - name: location
         description: The location of the AuthzExtension resource.
         varType: string
@@ -74,7 +74,7 @@ spec:
       - name: name
         description: The name of the AuthzExtension resource.
         varType: string
-        defaultValue: my-authz-extension
+        required: true
       - name: project_id
         description: The ID of the project in which the resource belongs. If not provided, the provider project is used.
         varType: string
@@ -86,11 +86,11 @@ spec:
       - name: timeout
         description: "Specifies the timeout for each individual message on the stream (between 10-10000ms). Format: '0.1s'."
         varType: string
-        defaultValue: 10s
+        required: true
       - name: fail_open
         description: Determines how the proxy behaves if the call to the extension fails. TRUE to continue, FALSE to error.
         varType: bool
-        defaultValue: false
+        required: true
       - name: metadata
         description: Metadata included as part of the ProcessingRequest message. Supports {forwarding_rule_id} substitution.
         varType: map(string)
