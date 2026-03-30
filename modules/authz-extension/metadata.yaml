@@ -15,7 +15,7 @@
 apiVersion: blueprints.cloud.google.com/v1alpha1
 kind: BlueprintMetadata
 metadata:
-  name: terraform-google-policy-authz-extension
+  name: terraform-google-network-services-authz-extension
   annotations:
     config.kubernetes.io/local-config: "true"
 spec:
@@ -25,6 +25,7 @@ spec:
       repo: https://github.com/GoogleCloudPlatform/terraform-google-network-security-authz.git
       sourceType: git
       dir: /modules/authz-extension
+    version: 0.1.1
     actuationTool:
       flavor: Terraform
       version: ">= 1.3"
@@ -55,7 +56,6 @@ spec:
       - name: authority
         description: Required. The authority header of the gRPC request.
         varType: string
-        defaultValue: authz-ext.example.com
       - name: description
         description: A free-text description of the resource.
         varType: string
@@ -66,7 +66,6 @@ spec:
       - name: load_balancing_scheme
         description: The load balancing scheme for which the AuthzExtension is applicable. Must be one of `INTERNAL_MANAGED` or `EXTERNAL_MANAGED`.
         varType: string
-        defaultValue: INTERNAL_MANAGED
       - name: location
         description: The location of the AuthzExtension resource.
         varType: string
@@ -74,7 +73,7 @@ spec:
       - name: name
         description: The name of the AuthzExtension resource.
         varType: string
-        defaultValue: my-authz-extension
+        required: true
       - name: project_id
         description: The ID of the project in which the resource belongs. If not provided, the provider project is used.
         varType: string
@@ -86,7 +85,7 @@ spec:
       - name: timeout
         description: "Specifies the timeout for each individual message on the stream (between 10-10000ms). Format: '0.1s'."
         varType: string
-        defaultValue: 10s
+        required: true
       - name: fail_open
         description: Determines how the proxy behaves if the call to the extension fails. TRUE to continue, FALSE to error.
         varType: bool
@@ -104,27 +103,39 @@ spec:
     outputs:
       - name: create_time
         description: The timestamp when the resource was created.
+        type: string
       - name: effective_labels
         description: All labels present on the resource in GCP, including those from Terraform and other sources.
+        type:
+          - map
+          - string
       - name: id
         description: The fully qualified identifier of the AuthzExtension resource.
+        type: string
       - name: name
         description: The name of the created AuthzExtension resource.
+        type: string
       - name: terraform_labels
         description: The combination of labels configured directly on the resource and default provider labels.
+        type:
+          - map
+          - string
       - name: update_time
         description: The timestamp when the resource was last updated.
+        type: string
   requirements:
     roles:
       - level: Project
         roles:
-          - roles/owner
+          - roles/networkservices.admin
+          - roles/iam.serviceAccountUser
     services:
+      - networkservices.googleapis.com
       - cloudresourcemanager.googleapis.com
       - storage-api.googleapis.com
       - serviceusage.googleapis.com
     providerVersions:
       - source: hashicorp/google
-        version: ">= 5.36, < 8"
+        version: ">= 6.46, < 8"
       - source: hashicorp/google-beta
-        version: ">= 5.36, < 8"
+        version: ">= 6.46, < 8"

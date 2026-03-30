@@ -48,4 +48,5 @@ module "authz_extension" {
   labels = {
     environment = "test"
   }
+  fail_open = false
 }
