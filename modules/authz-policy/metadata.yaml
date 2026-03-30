@@ -25,6 +25,7 @@ spec:
       repo: https://github.com/GoogleCloudPlatform/terraform-google-network-security-authz.git
       sourceType: git
       dir: /modules/authz-policy
+    version: 0.0.2
     actuationTool:
       flavor: Terraform
       version: ">= 1.3.0"
@@ -183,16 +184,26 @@ spec:
     outputs:
       - name: create_time
         description: The timestamp when the authz policy was created.
+        type: string
       - name: effective_labels
         description: All labels present on the resource in GCP.
+        type:
+          - map
+          - string
       - name: id
         description: The canonical ID of the authz policy.
+        type: string
       - name: name
         description: The name of the authz policy.
+        type: string
       - name: terraform_labels
         description: The combination of labels configured directly and default provider labels.
+        type:
+          - map
+          - string
       - name: update_time
         description: The timestamp when the authz policy was last updated.
+        type: string
   requirements:
     roles:
       - level: Project

@@ -25,7 +25,7 @@ spec:
       repo: https://github.com/GoogleCloudPlatform/terraform-google-network-security-authz.git
       sourceType: git
       dir: /modules/policy-authz-extension
-    version: 0.0.1
+    version: 0.0.2
     actuationTool:
       flavor: Terraform
       version: ">= 1.3"
@@ -122,10 +122,19 @@ spec:
     outputs:
       - name: extension_ids
         description: The fully qualified resource names designating the authorization extensions provisioned by the module.
+        type:
+          - map
+          - string
       - name: policy_extension_map
         description: A mapping of each authorization policy name to its designated authorization extension resource identifier.
+        type:
+          - map
+          - list: string
       - name: policy_ids
         description: The fully qualified resource names designating the authorization policies provisioned by the module.
+        type:
+          - map
+          - string
   requirements:
     roles:
       - level: Project

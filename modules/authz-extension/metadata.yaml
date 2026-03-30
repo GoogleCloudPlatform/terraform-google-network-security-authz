@@ -25,6 +25,7 @@ spec:
       repo: https://github.com/GoogleCloudPlatform/terraform-google-network-security-authz.git
       sourceType: git
       dir: /modules/authz-extension
+    version: 0.0.2
     actuationTool:
       flavor: Terraform
       version: ">= 1.3"
@@ -102,16 +103,29 @@ spec:
     outputs:
       - name: create_time
         description: The timestamp when the resource was created.
+        type: string
       - name: effective_labels
         description: All labels present on the resource in GCP, including those from Terraform and other sources.
+        type:
+          - map
+          - string
       - name: id
         description: The fully qualified identifier of the AuthzExtension resource.
+        type: string
       - name: name
         description: The name of the created AuthzExtension resource.
+        type: string
       - name: terraform_labels
         description: The combination of labels configured directly on the resource and default provider labels.
+        type:
+          - map
+          - string
       - name: update_time
         description: The timestamp when the resource was last updated.
+        type: string
+      - name: create_time
+        description: The timestamp when the resource was created.
+        type: string
   requirements:
     roles:
       - level: Project
