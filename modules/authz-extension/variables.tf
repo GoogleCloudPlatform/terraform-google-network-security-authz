@@ -8,7 +8,7 @@
 variable "authority" {
   description = "Required. The authority header of the gRPC request."
   type        = string
-  default = null
+  default     = null
 }
 
 variable "description" {
@@ -26,7 +26,7 @@ variable "labels" {
 variable "load_balancing_scheme" {
   description = "The load balancing scheme for which the AuthzExtension is applicable. Must be one of `INTERNAL_MANAGED` or `EXTERNAL_MANAGED`."
   type        = string
-  default = null
+  default     = null
 }
 
 variable "location" {
