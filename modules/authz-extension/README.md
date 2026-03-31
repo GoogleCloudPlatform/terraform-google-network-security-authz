@@ -60,7 +60,7 @@ module "authz_extension" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| authority | Required. The authority header of the gRPC request. | `string` | `null` | no |
+| authority | The authority header of the gRPC request. | `string` | `null` | no |
 | description | A free-text description of the resource. | `string` | `null` | no |
 | fail\_open | Determines how the proxy behaves if the call to the extension fails. TRUE to continue, FALSE to error. | `bool` | `false` | no |
 | forward\_headers | List of HTTP headers to forward to the extension. If omitted, all headers are sent. | `list(string)` | `null` | no |

@@ -25,7 +25,7 @@ spec:
       repo: https://github.com/GoogleCloudPlatform/terraform-google-network-security-authz.git
       sourceType: git
       dir: /modules/policy-authz-extension
-    version: 0.2.0
+    version: 0.3.0
     actuationTool:
       flavor: Terraform
       version: ">= 1.3"
@@ -65,9 +65,9 @@ spec:
         description: A map of unique Authz Extensions, indexed by their name.
         varType: |-
           map(object({
-              authority             = string
               backend_service       = string
-              load_balancing_scheme = string
+              authority             = optional(string)
+              load_balancing_scheme = optional(string)
               description           = optional(string, "Managed by ADC")
               timeout               = optional(string, "0.1s")
               fail_open             = optional(bool, false)
@@ -80,7 +80,7 @@ spec:
           map(object({
               action                = string
               load_balancing_scheme = string
-              target_resources      = list(string)
+              target_resources      = optional(list(string), [])
               description           = optional(string, "Managed by ADC")
               extension_names       = optional(list(string), [])
               iap_enabled           = optional(bool, false)

@@ -68,7 +68,7 @@ module "authz_policy" {
 | name | The name of the Authorization Policy. If not provided, a random name will be generated. | `string` | n/a | yes |
 | policy\_profile | Defines the type of authorization (REQUEST\_AUTHZ or CONTENT\_AUTHZ). | `string` | `null` | no |
 | project\_id | The project ID in which the Authorization Policy will be created. If not provided, the provider project is used. | `string` | n/a | yes |
-| target | The target resources and load balancing scheme this policy applies to. | <pre>object({<br>    load_balancing_scheme = optional(string)<br>    resources             = list(string)<br>  })</pre> | n/a | yes |
+| target | The target resources and load balancing scheme this policy applies to. | <pre>object({<br>    load_balancing_scheme = optional(string)<br>    resources             = optional(list(string), [])<br>  })</pre> | n/a | yes |
 
 ## Outputs
 

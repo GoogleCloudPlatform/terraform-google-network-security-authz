@@ -18,9 +18,9 @@ variable "location" {
 variable "extensions_config" {
   description = "A map of unique Authz Extensions, indexed by their name."
   type = map(object({
-    authority             = string
     backend_service       = string
-    load_balancing_scheme = string
+    authority             = optional(string)
+    load_balancing_scheme = optional(string)
     description           = optional(string, "Managed by ADC")
     timeout               = optional(string, "0.1s")
     fail_open             = optional(bool, false)
@@ -33,7 +33,7 @@ variable "policies_config" {
   type = map(object({
     action                = string
     load_balancing_scheme = string
-    target_resources      = list(string)
+    target_resources      = optional(list(string), [])
     description           = optional(string, "Managed by ADC")
     extension_names       = optional(list(string), [])
     iap_enabled           = optional(bool, false)

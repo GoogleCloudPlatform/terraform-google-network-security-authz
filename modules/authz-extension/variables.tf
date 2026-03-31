@@ -6,7 +6,7 @@
  */
 
 variable "authority" {
-  description = "Required. The authority header of the gRPC request."
+  description = "The authority header of the gRPC request."
   type        = string
   default     = null
 }
