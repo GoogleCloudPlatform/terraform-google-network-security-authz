@@ -126,7 +126,7 @@ spec:
           - map
           - string
       - name: policy_extension_map
-        description: "A JSON string representing a mapping of each authorization policy name to a list of its designated authorization extension resource identifiers."
+        description: A JSON string representing a mapping of each authorization policy name to a list of its designated authorization extension resource identifiers.
         type: string
       - name: policy_ids
         description: The fully qualified resource names designating the authorization policies provisioned by the module.

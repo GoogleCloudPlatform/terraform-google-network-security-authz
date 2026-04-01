@@ -67,7 +67,7 @@ module "policy_authz_extension" {
 | Name | Description |
 |------|-------------|
 | extension\_ids | The fully qualified resource names designating the authorization extensions provisioned by the module. |
-| policy\_extension\_map | A mapping of each authorization policy name to its designated authorization extension resource identifier. |
+| policy\_extension\_map | A JSON string representing a mapping of each authorization policy name to a list of its designated authorization extension resource identifiers. |
 | policy\_ids | The fully qualified resource names designating the authorization policies provisioned by the module. |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
