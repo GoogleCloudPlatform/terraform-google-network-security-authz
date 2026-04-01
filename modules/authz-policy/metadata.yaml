@@ -65,6 +65,13 @@ spec:
               resources             = optional(list(string), [])
             })
         required: true
+        connections:
+          - source:
+              source: github.com/GoogleCloudPlatform/terraform-google-agent-gateway
+              version: ">=0.2.0"
+            spec:
+              outputExpr: "[agent_gateway_id]"
+              inputPath: resources
       - name: description
         description: A free-text description of the Authorization Policy.
         varType: string
@@ -83,6 +90,13 @@ spec:
                 enabled = bool
               }))
             })
+        connections:
+          - source:
+              source: github.com/GoogleCloudPlatform/terraform-google-network-security-authz//modules/authz-extension
+              version: ">=0.4.0"
+            spec:
+              outputExpr: "[id]"
+              inputPath: authz_extension.resources
       - name: policy_profile
         description: Defines the type of authorization (REQUEST_AUTHZ or CONTENT_AUTHZ).
         varType: string
