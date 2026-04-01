@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://github.com/GoogleCloudPlatform/terraform-google-network-security-authz/compare/v0.3.0...v0.4.0) (2026-04-01)
+
+
+### Features
+
+* metadata fix ([bd1b3e2](https://github.com/GoogleCloudPlatform/terraform-google-network-security-authz/commit/bd1b3e276ab724f86c65df9465175b08487343ac))
+
 ## [0.3.0](https://github.com/GoogleCloudPlatform/terraform-google-network-security-authz/compare/v0.2.0...v0.3.0) (2026-03-31)
 
 
