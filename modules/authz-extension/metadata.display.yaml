@@ -52,6 +52,9 @@ spec:
         metadata:
           name: metadata
           title: Metadata
+        model_armor_templates:
+          name: model_armor_templates
+          title: Model Armor Templates
         name:
           name: name
           title: Name

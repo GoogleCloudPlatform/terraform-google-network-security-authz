@@ -77,3 +77,9 @@ variable "wire_format" {
   type        = string
   default     = null
 }
+
+variable "model_armor_templates" {
+  description = "Optional list of Model Armor template full resource paths (e.g., projects/{project}/locations/{location}/templates/{template_id}). When provided, adds model_armor_settings to metadata."
+  type        = list(string)
+  default     = []
+}

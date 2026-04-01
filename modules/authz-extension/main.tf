@@ -25,7 +25,17 @@ resource "google_network_services_authz_extension" "this" {
   service               = var.service
   timeout               = var.timeout
   fail_open             = var.fail_open
-  metadata              = var.metadata
+  metadata = merge(
+    var.metadata,
+    length(var.model_armor_templates) > 0 ? {
+      model_armor_settings = jsonencode([
+        for template_id in var.model_armor_templates : {
+          request_template_id  = template_id
+          response_template_id = template_id
+        }
+      ])
+    } : {}
+  )
   forward_headers       = var.forward_headers
   wire_format           = var.wire_format
 }
