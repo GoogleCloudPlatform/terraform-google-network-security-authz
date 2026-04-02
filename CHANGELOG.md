@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.1](https://github.com/GoogleCloudPlatform/terraform-google-network-security-authz/compare/v0.4.0...v0.4.1) (2026-04-02)
+
+
+### Bug Fixes
+
+* added connection for authz policy and authz policy extension ([1938445](https://github.com/GoogleCloudPlatform/terraform-google-network-security-authz/commit/19384452c7dd097a47d7658ca64e7413fd41a871))
+
 ## [0.4.0](https://github.com/GoogleCloudPlatform/terraform-google-network-security-authz/compare/v0.3.0...v0.4.0) (2026-04-01)
 
 
