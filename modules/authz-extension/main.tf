@@ -36,6 +36,6 @@ resource "google_network_services_authz_extension" "this" {
       ])
     } : {}
   )
-  forward_headers       = var.forward_headers
-  wire_format           = var.wire_format
+  forward_headers = var.forward_headers
+  wire_format     = var.wire_format
 }
