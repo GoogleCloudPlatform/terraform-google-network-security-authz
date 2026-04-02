@@ -68,6 +68,7 @@ module "authz_extension" {
 | load\_balancing\_scheme | The load balancing scheme for which the AuthzExtension is applicable. Must be one of `INTERNAL_MANAGED` or `EXTERNAL_MANAGED`. | `string` | `null` | no |
 | location | The location of the AuthzExtension resource. | `string` | n/a | yes |
 | metadata | Metadata included as part of the ProcessingRequest message. Supports {forwarding\_rule\_id} substitution. | `map(string)` | `{}` | no |
+| model\_armor\_templates | Optional list of Model Armor template full resource paths (e.g., projects/{project}/locations/{location}/templates/{template\_id}). When provided, adds model\_armor\_settings to metadata. | `list(string)` | `[]` | no |
 | name | The name of the AuthzExtension resource. | `string` | n/a | yes |
 | project\_id | The ID of the project in which the resource belongs. If not provided, the provider project is used. | `string` | n/a | yes |
 | service | The service that runs the extension (e.g., a BackendService URI or iap.googleapis.com). | `string` | n/a | yes |
