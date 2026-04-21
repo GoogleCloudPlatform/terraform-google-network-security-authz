@@ -225,6 +225,9 @@ spec:
         location:
           name: location
           title: Location
+        module_depends_on:
+          name: module_depends_on
+          title: Module Depends On
         name:
           name: name
           title: Name
