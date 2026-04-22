@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.5.0](https://github.com/GoogleCloudPlatform/terraform-google-network-security-authz/compare/v0.4.1...v0.5.0) (2026-04-22)
+
+
+### ⚠ BREAKING CHANGES
+
+* add modules dependecny
+
+### Features
+
+* add modules dependecny ([df0972d](https://github.com/GoogleCloudPlatform/terraform-google-network-security-authz/commit/df0972db88e796c8dfb14cfe6fd7b14a47f2fa72))
+
 ## [0.4.1](https://github.com/GoogleCloudPlatform/terraform-google-network-security-authz/compare/v0.4.0...v0.4.1) (2026-04-02)
 
 
