@@ -201,7 +201,7 @@ spec:
         defaultValue: []
         connections:
           - source:
-              source: github.com/vandnagarggoogle/terraform-google-network-security-authz//modules/authz-policy
+              source: github.com/GoogleCloudPlatform/terraform-google-network-security-authz//modules/authz-policy
               version: ">=0.4.1"
             spec:
               outputExpr: id
