@@ -153,7 +153,7 @@ resource "google_network_security_authz_policy" "authz_policy" {
           dynamic "operations" {
             for_each = to.value.operations != null ? [to.value.operations] : []
             content {
-              methods = operations.value.methods
+              methods = try(operations.value.methods, null) != null ? operations.value.methods : null
 
               dynamic "paths" {
                 for_each = operations.value.paths != null ? operations.value.paths : []
@@ -196,21 +196,29 @@ resource "google_network_security_authz_policy" "authz_policy" {
                 }
               }
 
-              header_set {
-                dynamic "headers" {
-                  for_each = operations.value.headers
-                  content {
-                    name = headers.value.name
-                    value {
-                      exact       = headers.value.exact
-                      prefix      = headers.value.prefix
-                      suffix      = headers.value.suffix
-                      contains    = headers.value.contains
-                      ignore_case = headers.value.ignore_case
+              dynamic "header_set" {
+                for_each = try(operations.value.headers, null) != null ? [1] : []
+                content {
+                  dynamic "headers" {
+                    for_each = operations.value.headers
+                    content {
+                      name = headers.value.name
+                      # Note: 'value' should also be dynamic to avoid empty value {} blocks
+                      dynamic "value" {
+                        for_each = [1]
+                        content {
+                          exact       = try(headers.value.exact, null)
+                          prefix      = try(headers.value.prefix, null)
+                          suffix      = try(headers.value.suffix, null)
+                          contains    = try(headers.value.contains, null)
+                          ignore_case = try(headers.value.ignore_case, null)
+                        }
+                      }
                     }
                   }
                 }
               }
+
             }
           }
 
