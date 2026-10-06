@@ -56,9 +56,11 @@ spec:
       - name: authority
         description: The authority header of the gRPC request.
         varType: string
+        defaultValue: null
       - name: description
         description: A free-text description of the resource.
         varType: string
+        defaultValue: null
       - name: labels
         description: A set of key/value label pairs to assign to the resource.
         varType: map(string)
@@ -66,6 +68,7 @@ spec:
       - name: load_balancing_scheme
         description: The load balancing scheme for which the AuthzExtension is applicable. Must be one of `INTERNAL_MANAGED` or `EXTERNAL_MANAGED`.
         varType: string
+        defaultValue: null
       - name: location
         description: The location of the AuthzExtension resource.
         varType: string
@@ -97,9 +100,11 @@ spec:
       - name: forward_headers
         description: List of HTTP headers to forward to the extension. If omitted, all headers are sent.
         varType: list(string)
+        defaultValue: null
       - name: wire_format
         description: "The format of communication supported. Possible values: WIRE_FORMAT_UNSPECIFIED, EXT_PROC_GRPC, EXT_AUTHZ_GRPC."
         varType: string
+        defaultValue: null
       - name: model_armor_templates
         description: Optional list of Model Armor template full resource paths (e.g., projects/{project}/locations/{location}/templates/{template_id}). When provided, adds model_armor_settings to metadata.
         varType: list(string)
