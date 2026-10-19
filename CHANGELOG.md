@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.6.3](https://github.com/GoogleCloudPlatform/terraform-google-network-security-authz/compare/v0.6.2...v0.6.3) (2026-10-19)
+
+
+### Bug Fixes
+
+* populate null defaultValue in authz-extension blueprint metadata ([4d57dc9](https://github.com/GoogleCloudPlatform/terraform-google-network-security-authz/commit/4d57dc984ee7e67f5d1d577c72ceb4baa9160050))
+* populate null defaultValue in authz-extension blueprint metadata ([f552332](https://github.com/GoogleCloudPlatform/terraform-google-network-security-authz/commit/f552332d63417455fa869b703b5668a599a9374b))
+* populate null defaultValue in authz-policy blueprint metadata ([8575cb3](https://github.com/GoogleCloudPlatform/terraform-google-network-security-authz/commit/8575cb36eb06b1bcd41df0777b636ee439f9c8a2))
+* populate null defaultValue in authz-policy blueprint metadata ([26651bd](https://github.com/GoogleCloudPlatform/terraform-google-network-security-authz/commit/26651bdfd5661738213d7db4d56e8e9ef01997d6))
+
 ## [0.6.2](https://github.com/GoogleCloudPlatform/terraform-google-network-security-authz/compare/v0.6.1...v0.6.2) (2026-06-10)
 
 
