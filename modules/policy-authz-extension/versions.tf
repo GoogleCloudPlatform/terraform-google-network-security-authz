@@ -28,6 +28,6 @@ terraform {
   }
 
   provider_meta "google" {
-    module_name = "blueprints/terraform/policy-authz-extension/v0.6.2"
+    module_name = "blueprints/terraform/policy-authz-extension/v0.6.3"
   }
 }
